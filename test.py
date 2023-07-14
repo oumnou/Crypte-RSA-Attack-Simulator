@@ -9,7 +9,7 @@ import random
 
 
 root = Tk()
-root.title('RAS(RSA Attack Simulator)')
+root.title('RAS(RSAAttackSimulator)')
 root.iconbitmap('img/pizza.ico')
 root.maxsize(1100,1500)
 # root.geometry("1000x2000")
