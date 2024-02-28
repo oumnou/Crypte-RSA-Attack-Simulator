@@ -1,6 +1,7 @@
 
 # Copyright
-from functions import *
+import function
+
 from tkinter import *
 from PIL import ImageTk,Image
 from sympy import *
@@ -10,16 +11,16 @@ import random
 
 root = Tk()
 root.title('RAS(RSAAttackSimulator)')
-root.iconbitmap('img/pizza.ico')
+root.iconbitmap('Crypte-RSA-Attack-Simulator\img\pizza.ico')
 root.maxsize(1100,1500)
 # root.geometry("1000x2000")
 
 a=Label(root, text="Oumaima",font=("Arial Bold",20))
 a.grid(row=0, column=2)
 
-my_img = Image.open("img/oum.png")
+my_img = Image.open("Crypte-RSA-Attack-Simulator\img\oum.png")
 
-resize_image = my_img.resize((150,150), Image.ANTIALIAS)
+resize_image = my_img.resize((150,150), Image.ADAPTIVE)
 
 my_pic = ImageTk.PhotoImage(resize_image)
 my_label = Label(image=my_pic )
@@ -69,9 +70,9 @@ h.grid(row=12, column=0)
 ############################ Alice
 
 
-my_img3 = Image.open("img/send.png")
+my_img3 = Image.open('Crypte-RSA-Attack-Simulator\img\send.png')
 
-resize_image3 = my_img3.resize((150,150), Image.ANTIALIAS)
+resize_image3 = my_img3.resize((150,150), Image.ADAPTIVE)
 
 my_pic3 = ImageTk.PhotoImage(resize_image3)
 my_label = Label(image=my_pic3)
@@ -85,9 +86,9 @@ a.grid(row=0, column=11)
 
 
 
-my_img2 = Image.open("img/mar.png")
+my_img2 = Image.open('Crypte-RSA-Attack-Simulator\img\mar.png')
 
-resize_image2 = my_img2.resize((150,150), Image.ANTIALIAS)
+resize_image2 = my_img2.resize((150,150), Image.ADAPTIVE)
 
 my_pic2 = ImageTk.PhotoImage(resize_image2)
 my_label = Label(image=my_pic2 )
@@ -147,7 +148,7 @@ def new():
          global eA
          lok = Toplevel()         
          lok.title('Generator')
-         lok.iconbitmap('img/pizza.ico')
+         lok.iconbitmap('Crypte-RSA-Attack-Simulator\img\pizza.ico')
          
          #P
          b=Label(lok, text="P")
@@ -165,7 +166,7 @@ def new():
         
          #ButtonExit
 
-         s = Button(lok, text="exit",)
+         s = Button(lok, text="exit")
          s.grid(row=2, column=4 )
          #ButtonStart
 
@@ -260,9 +261,9 @@ s.grid(row=30, column=0)
 a=Label(frame, text="Ayman",font=("Arial Bold",20))
 a.grid(row=21, column=20)
 
-my_img4 = Image.open("img/hacker.png")
+my_img4 = Image.open("Crypte-RSA-Attack-Simulator\img\hacker.png")
 
-resize_image4 = my_img4.resize((150,150), Image.ANTIALIAS)
+resize_image4 = my_img4.resize((150,150), Image.ADAPTIVE)
 
 my_pic4 = ImageTk.PhotoImage(resize_image4)
 my_label = Label(frame,image=my_pic4 )
@@ -306,10 +307,10 @@ s = Button(frame, text="Send")
 s.grid(row=30, column=40)
 
 def pirat():
-  L,k=main(n)
+  L,k=function.main(function.n)
   zoo=Toplevel()
   zoo.title('Attack')
-  zoo.iconbitmap('img/pizza.ico')
+  zoo.iconbitmap('pizza.ico')
 
 #p
   p2=Label(zoo, text="p : ")
@@ -333,22 +334,6 @@ def pirat():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def newAyman():
          global e
          global pe
@@ -356,7 +341,7 @@ def newAyman():
          global e2
          bok = Toplevel()         
          bok.title('Generator')
-         bok.iconbitmap('img/pizza.ico')
+         bok.iconbitmap('Crypte-RSA-Attack-Simulator\img\pizza.ico')
          
          #P
          Pa=Label(bok, text="P")
@@ -389,12 +374,12 @@ def getEntryA():
          global my_e
          global private
          
-         pe.insert(0,p)
-         be.insert(0,q)
-         n2.insert(0,n)
+         pe.insert(0,function.p)
+         be.insert(0,function.q)
+         n2.insert(0,function.n)
          my_e = exposant()
-         d=inverse_modulaire(my_e,phi)
-         public2 = (my_e,n)
+         d=function.inverse_modulaire(my_e,function.phi)
+         public2 = (my_e,function.n)
          private = d
          pu2.insert(0,my_e)
          pr2.insert(0,d)
@@ -404,7 +389,7 @@ def getEntryA():
 def newmsg2():
          butta = Button(root, text="New msg",background="#856ff8", command= lambda:getmsg1())
          butta.grid(row=0, column=3)
-         hack2.insert(0,n)
+         hack2.insert(0,function.n)
 
 
 
@@ -415,12 +400,12 @@ def getEntry():
          global my_e
          global private
          global public1
-         eA.insert(0,p)
-         e1.insert(0,q)
-         n1.insert(0,n)
+         eA.insert(0,function.p)
+         e1.insert(0,function.q)
+         n1.insert(0,function.n)
          my_e = exposant()
-         d= inverse_modulaire(my_e,phi)
-         public1 = (my_e,n)
+         d= function.inverse_modulaire(my_e,function.phi)
+         public1 = (my_e,function.n)
          private = d
          pu.insert(0,my_e)
          pr.insert(0,d)
@@ -431,13 +416,13 @@ def getEntry():
 def newmsg():
          butt = Button(root, text="New msg",background="#856ff8", command= lambda:getmsg())
          butt.grid(row=0, column=10)
-         hack1.insert(0,n)
+         hack1.insert(0,function.n)
 
      
         
 def exposant():
          e=random.randrange(0, 10000)
-         while pgcd(e,phi) !=1:
+         while function.pgcd(e,function.phi) !=1:
           e=random.randrange(0, 10000)
          print("L'exposant e = ",e)
          return e
@@ -449,16 +434,16 @@ def  getmsg():
          global dechiffree
          msg1 = msg.get()
          print(msg1)
-         a=chiffre(f[0], f[1], msg1)
+         a=function.chiffre(function.f[0], function.f[1], msg1)
 
 
          top = Toplevel()         
          top.title('Message')
-         top.iconbitmap('img/pizza.ico')
+         top.iconbitmap('img\pizza.ico')
         
-         chifreee=chiffre(f[0], f[1], msg.get())
+         chifreee=function.chiffre(function.f[0], function.f[1], msg.get())
          print(chifreee)
-         dechiffree=dechiffre(f[0], f[2], *chifreee)
+         dechiffree=function.dechiffre(function.f[0], function.f[2], *chifreee)
          print("dechiffree : ",dechiffree)
          
          #M chifree
@@ -492,7 +477,7 @@ def Sign():
 
          print(res)
          print(type(res))
-         S = (res**private) % n
+         S = (res**private) % function.n
          
          #Signature
          Sm=Label(top, text="Signature : ")
@@ -506,7 +491,7 @@ def Sign():
 
          pm=Label(top, text="Signature 2 : ")
          pm.grid(row=10, column=3)
-         M1 = ((S**exposant()) % n)
+         M1 = ((S**exposant()) % function.n)
 
 
          mo = Entry(top, width=25)
@@ -557,16 +542,16 @@ def  getmsg1():
          global dechiffree
          msg1 = msg.get()
          print(msg1)
-         a=chiffre(f[0], f[1], msg1)
+         a=function.chiffre(function.f[0], function.f[1], msg1)
 
 
          pol = Toplevel()         
          pol.title('Message')
-         pol.iconbitmap('img/pizza.ico')
+         pol.iconbitmap('Crypte-RSA-Attack-Simulator\img\pizza.ico')
         
-         chifreee=chiffre(f[0], f[1], msg2.get())
+         chifreee=function.chiffre(function.f[0], function.f[1], msg2.get())
          print(chifreee)
-         dechiffree=dechiffre(f[0], f[2], *chifreee)
+         dechiffree=function.dechiffre(function.f[0], function.f[2], *chifreee)
          print("dechiffree : ",dechiffree)
          
          #M chifree
@@ -599,12 +584,12 @@ def getEntry():
          global my_e
          global private
          global public1
-         eA.insert(0,p)
-         e1.insert(0,q)
-         n1.insert(0,n)
+         eA.insert(0,function.p)
+         e1.insert(0,function.q)
+         n1.insert(0,function.n)
          my_e = exposant()
-         d= inverse_modulaire(my_e,phi)
-         public1 = (my_e,n)
+         d= function.inverse_modulaire(my_e,function.phi)
+         public1 = (my_e,function.n)
          private = d
          pu.insert(0,my_e)
          pr.insert(0,d)
@@ -615,13 +600,13 @@ def getEntry():
 def newmsg():
          butt = Button(root, text="New msg",background="#856ff8", command= lambda:getmsg())
          butt.grid(row=0, column=10)
-         hack1.insert(0,n)
+         hack1.insert(0,function.n)
 
      
         
 def exposant():
          e=random.randrange(0, 10000)
-         while pgcd(e,phi) !=1:
+         while function.pgcd(e,function.phi) !=1:
           e=random.randrange(0, 10000)
          print("L'exposant e = ",e)
          return e
@@ -633,16 +618,16 @@ def  getmsg():
          global dechiffree
          msg1 = msg.get()
          print(msg1)
-         a=chiffre(f[0], f[1], msg1)
+         a=function.chiffre(function.f[0], function.f[1], msg1)
 
 
          top = Toplevel()         
          top.title('Message')
-         top.iconbitmap('img/pizza.ico')
+         top.iconbitmap('Crypte-RSA-Attack-Simulator\img\pizza.ico')
         
-         chifreee=chiffre(f[0], f[1], msg.get())
+         chifreee=function.chiffre(function.f[0], function.f[1], msg.get())
          print(chifreee)
-         dechiffree=dechiffre(f[0], f[2], *chifreee)
+         dechiffree=function.dechiffre(function.f[0], function.f[2], *chifreee)
          print("dechiffree : ",dechiffree)
          
          #M chifree
@@ -676,7 +661,7 @@ def Sign():
 
          print(res)
          print(type(res))
-         S = (res**private) % n
+         S = (res**private) % function.n
          
          #Signature
          Sm=Label(top, text="Signature : ")
@@ -690,7 +675,7 @@ def Sign():
 
          pm=Label(top, text="Signature 2 : ")
          pm.grid(row=10, column=3)
-         M1 = ((S**exposant()) % n)
+         M1 = ((S**exposant()) % function.n)
 
 
          mo = Entry(top, width=25)
@@ -738,16 +723,16 @@ def Done():
   
 def exposant():
          e=random.randrange(0, 10000)
-         while pgcd(e,phi) !=1:
+         while function.pgcd(e,function.phi) !=1:
           e=random.randrange(0, 10000)
          print("L'exposant e = ",e)
          return e
 
 def pirat1():
-  L,k=main(n)
+  L,k=function.main(function.n)
   zoo=Toplevel()
   zoo.title('Attack')
-  zoo.iconbitmap('img/pizza.ico')
+  zoo.iconbitmap('Crypte-RSA-Attack-Simulator\img\pizza.ico')
 
   
 #p

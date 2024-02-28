@@ -1,7 +1,6 @@
 from tkinter import *
 from PIL import Image
 from sympy import *
-from test import *
 import random
 import math 
 
