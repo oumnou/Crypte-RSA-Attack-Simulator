@@ -1,112 +1,9 @@
-from tkinter import *
-from PIL import Image
 from sympy import *
 import random
 import math 
 
 
-def newAyman():
-         global e
-         global e1
-         global e2
-         bok = Toplevel()         
-         bok.title('Generator')
-         bok.iconbitmap('pizza.ico')
-         
-         #P
-         b=Label(bok, text="P")
-         b.grid(row=0, column=1)
-
-         e = Entry(bok, width=25)
-         e.grid(row=1, column=1)
-         m = e.get()
-         print(m)
-         #Q
-         b=Label(bok, text="Q")
-         b.grid(row=0, column=3)
-
-         e1 = Entry(bok, width=25)
-         e1.grid(row=1, column=3)
-
-        
-         #ButtonExit
-
-         s = Button(bok, text="exit",)
-         s.grid(row=2, column=4 )
-         #ButtonStart
-
-         s = Button(bok, text="Start",command= lambda : getEntryA())
-         s.grid(row=2, column=2)
-
-def getEntryA():
-         global phi
-         global my_e
-         global private
-         p1 = e.insert(0,p)
-         q1 = e1.insert(0,q)
-         n2.insert(0,n)
-         my_e = exposant()
-         d=inverse_modulaire(my_e,phi)
-         public = (my_e,n)
-         private = d
-         pu2.insert(0,my_e)
-         pr2.insert(0,d)
-         print("la cle public est:",public)
-         print("la cle privée est:", private)
-
-def newmsg():
-         butt = Button(root, text="New msg",background="#856ff8", command= lambda:getmsg())
-         butt.grid(row=0, column=10)
-         hack2.insert(0,n)
-
-def  getmsg():
-         global pol
-         global chifreee
-         global dechiffree
-         msg1 = msg.get()
-         print(msg1)
-         a=chiffre(f[0], f[1], msg1)
-
-
-         pol = Toplevel()         
-         pol.title('Message')
-         pol.iconbitmap('pizza.ico')
-        
-         chifreee=chiffre(f[0], f[1], msg2.get())
-         print(chifreee)
-         dechiffree=dechiffre(f[0], f[2], *chifreee)
-         print("dechiffree : ",dechiffree)
-         
-         #M chifree
-         b=Label(pol,text="encrypted message :")
-         b.grid(row=0, column=0)
-         e = Entry(pol, width=25)
-         e.grid(row=0, column=1)
-         e.insert(0,chifreee)
     
-         #e
-         b=Label(pol, text="e : ")
-         b.grid(row=2, column=0)
-
-         e1 = Entry(pol, width=25)
-         e1.grid(row=2, column=1)
-         e1.insert(0,d)
-
-         #n
-         ol=Label(pol, text="n :")
-         ol.grid(row=3, column=0)
-
-         n1 = Entry(pol, width=25)
-         n1.grid(row=3, column=1)
-         n1.insert(0, f[0])
-         
-         m = e.get()
-         botona = Button(pol,text="show :",command=lambda: msg11())
-         botona.grid(row=9, column=0)
-
-         print(m)
-         return chifreee
-       
 def exposant():
          e=random.randrange(0, 10000)
          while pgcd(e,phi) !=1:
@@ -199,8 +96,6 @@ def main(number):
          elif len(i[1])==3:
                   return i[1][0]*i[1][1],i[1][2]
 
-
-
 def coupcoup(k, long):
 	
 	""""découpe des blocs de longueur long dans une chaine de caractères k et retourne une liste des blocs"""
@@ -225,8 +120,6 @@ def coupcoup(k, long):
 	
 	return l
 
-
-
 def pgcd(a,b):
 	
 	"""retourne le plus grand dénominateur commun de a et b"""
@@ -238,8 +131,6 @@ def pgcd(a,b):
 		a,b=b,r
 		
 	return a
-	
-	
 	
 def pgcde(a, b):
 	
@@ -258,10 +149,6 @@ def pgcde(a, b):
 	
 	return (r, u, v)
 
-
-
-
-
 def key():
 	
 	"""retourne un dictionnaire contenant la clé privée et la clé publique sous forme de tuples: {priv:(clé privée),pub:(clé publique)}"""
@@ -278,12 +165,6 @@ def key():
 
 	return p,q	
 	#calcul de n et m
-
-
-a=key()
-p=int(a[0])
-q=int(a[1])
-phi = (int(p)-1)*(int(q)-1)
 
 def key2():
 	
@@ -303,8 +184,6 @@ def key2():
 	# return {"priv":(n,c), "pub":(n,d)}
 	return n,c,d
 
-
-	
 def chiffre(n, c, msg):
 	
 	#conversion du message en codes ascii	
@@ -342,9 +221,6 @@ def chiffre(n, c, msg):
 	crypt = [str(((int(i))**c)%n) for i in l]
 	
 	return crypt
-	
-
-	
 	
 def dechiffre(n, d, *crypt):
 
@@ -391,6 +267,10 @@ def dechiffre(n, d, *crypt):
 #return n,c,d
 #def dechiffre(n, d, *crypt):
 #def chiffre(n, c, msg):
+a=key()
+p=int(a[0])
+q=int(a[1])
+phi = (int(p)-1)*(int(q)-1)
 
 f= key2()
 k=key()

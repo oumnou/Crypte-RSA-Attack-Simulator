@@ -1,16 +1,11 @@
-
 # Copyright
 import function
-
 from tkinter import *
 from PIL import ImageTk,Image
-from sympy import *
-import random
-
 
 
 root = Tk()
-root.title('RAS(RSAAttackSimulator)')
+root.title('RAS(RSA_Attack_Simulator)')
 root.iconbitmap('Crypte-RSA-Attack-Simulator\img\pizza.ico')
 root.maxsize(1100,1500)
 # root.geometry("1000x2000")
@@ -25,6 +20,7 @@ resize_image = my_img.resize((150,150), Image.ADAPTIVE)
 my_pic = ImageTk.PhotoImage(resize_image)
 my_label = Label(image=my_pic )
 my_label.grid(row=0, column=0)
+
 
 #n
 b=Label(root, text="n")
@@ -67,7 +63,7 @@ s.grid(row=12, column=3)
 #Buttonkey
 h = Button(root, text="keyToAyman" ,command= lambda: stillpublickey1())
 h.grid(row=12, column=0)
-############################ Alice
+############################ Oumaima ################
 
 
 my_img3 = Image.open('Crypte-RSA-Attack-Simulator\img\send.png')
@@ -137,74 +133,6 @@ h = Button(root, text="keyToOumaima",command= lambda: stillpublickey())
 h.grid(row=12, column=13)
 
 
-
-
-
-############################################################################################################### BOB
-#FENETRE 2
-def new():
-         global e
-         global e1
-         global eA
-         lok = Toplevel()         
-         lok.title('Generator')
-         lok.iconbitmap('Crypte-RSA-Attack-Simulator\img\pizza.ico')
-         
-         #P
-         b=Label(lok, text="P")
-         b.grid(row=0, column=1)
-
-         eA = Entry(lok, width=25)
-         eA.grid(row=1, column=1)
-         #Q
-         bE=Label(lok, text="Q")
-         bE.grid(row=0, column=3)
-
-         e1 = Entry(lok, width=25)
-         e1.grid(row=1, column=3)
-
-        
-         #ButtonExit
-
-         s = Button(lok, text="exit")
-         s.grid(row=2, column=4 )
-         #ButtonStart
-
-         s = Button(lok, text="Start",command= lambda : getEntry())
-         s.grid(row=2, column=2)
-
-##############################
-
-def stillpublickey1():
-  buttan1 = Button(root, text="Key",background="#856ff8",command= lambda:publicKey1())
-  buttan1.grid(row=0, column=8)
-
-
-def publicKey1():
-  AYA1=Toplevel()
-  AYA1.title('Key to Ayman')
-
-  #public key e
-  Pk11=Label(AYA1, text="public key e :")
-  Pk11.grid(row=0, column=0)
-  Pkey11 = Entry(AYA1, width=35)
-  Pkey11.grid(row=0, column=1)
-  Pkey11.insert(0,public1[0])
-
- #public key n
-  Pk11=Label(AYA1, text="public key n :")
-  Pk11.grid(row=1, column=0)
-  Pkey11 = Entry(AYA1, width=35)
-  Pkey11.grid(row=1, column=1)
-  Pkey11.insert(0,public1[1])
-
- #DONE
-  Bkey1 = Button(AYA1,text="Done...",command= lambda:Done1())
-  Bkey1.grid(row=2, column=0)
-
-def Done1():
-  n2.insert(0,public1[1])
-  pu2.insert(0,public1[0])
 
 
 ##################################### HackerZone
@@ -306,6 +234,11 @@ r.grid(row=30, column=30)
 s = Button(frame, text="Send")
 s.grid(row=30, column=40)
 
+
+def stillpublickey1():
+  buttan1 = Button(root, text="Key",background="#856ff8",command= lambda:publicKey1())
+  buttan1.grid(row=0, column=8)
+
 def pirat():
   L,k=function.main(function.n)
   zoo=Toplevel()
@@ -328,11 +261,6 @@ def pirat():
   n11.grid(row=3, column=1)
   n11.insert(0,k)
   key1.insert(0,my_e)
-
-
-
-
-
 
 def newAyman():
          global e
@@ -360,13 +288,12 @@ def newAyman():
          #ButtonExit
 
          s = Button(bok, text="exit",)
+         print("Press Test")
          s.grid(row=2, column=4 )
          #ButtonStart
 
          s = Button(bok, text="Start",command=lambda:getEntryA())
          s.grid(row=2, column=2)
-
-
 
 def getEntryA():
          global phi
@@ -377,12 +304,15 @@ def getEntryA():
          pe.insert(0,function.p)
          be.insert(0,function.q)
          n2.insert(0,function.n)
-         my_e = exposant()
+         my_e = function.exposant()
          d=function.inverse_modulaire(my_e,function.phi)
          public2 = (my_e,function.n)
          private = d
+
          pu2.insert(0,my_e)
          pr2.insert(0,d)
+         print("Press getEntry A Test")
+
          print("la cle public est:",public2)
          print("la cle privée est:", private)
 
@@ -390,10 +320,6 @@ def newmsg2():
          butta = Button(root, text="New msg",background="#856ff8", command= lambda:getmsg1())
          butta.grid(row=0, column=3)
          hack2.insert(0,function.n)
-
-
-
-
 
 def getEntry():
          global phi
@@ -403,140 +329,23 @@ def getEntry():
          eA.insert(0,function.p)
          e1.insert(0,function.q)
          n1.insert(0,function.n)
-         my_e = exposant()
+         my_e = function.exposant()
          d= function.inverse_modulaire(my_e,function.phi)
          public1 = (my_e,function.n)
          private = d
          pu.insert(0,my_e)
          pr.insert(0,d)
+         print("Press get Test :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::;;;;;")
+
          print("la cle public est:",public1)
          print("la cle privée est:", private)
-
 
 def newmsg():
          butt = Button(root, text="New msg",background="#856ff8", command= lambda:getmsg())
          butt.grid(row=0, column=10)
          hack1.insert(0,function.n)
 
-     
-        
-def exposant():
-         e=random.randrange(0, 10000)
-         while function.pgcd(e,function.phi) !=1:
-          e=random.randrange(0, 10000)
-         print("L'exposant e = ",e)
-         return e
-
-
-def  getmsg():
-         global top
-         global chifreee
-         global dechiffree
-         msg1 = msg.get()
-         print(msg1)
-         a=function.chiffre(function.f[0], function.f[1], msg1)
-
-
-         top = Toplevel()         
-         top.title('Message')
-         top.iconbitmap('img\pizza.ico')
-        
-         chifreee=function.chiffre(function.f[0], function.f[1], msg.get())
-         print(chifreee)
-         dechiffree=function.dechiffre(function.f[0], function.f[2], *chifreee)
-         print("dechiffree : ",dechiffree)
-         
-         #M chifree
-         b=Label(top,text="encrypted message :")
-         b.grid(row=0, column=0)
-         e = Entry(top, width=25)
-         e.grid(row=0, column=1)
-         e.insert(0,chifreee)
-    
-         
-         botona = Button(top,text="show :",command=lambda: msg11())
-         botona.grid(row=9, column=0)
-
-         return chifreee
-
-def msg11():
-           #message dechiffre
-         mm=Label(top, text="decrypted message : ")
-         mm.grid(row=10, column=0)
-        
-
-         lo = Entry(top, width=25)
-         lo.grid(row=10, column=1)
-         lo.insert(0,dechiffree)
-
-def Sign():
-         s = [str(integer) for integer in getmsg()]
-         a_string = "".join(s)
-
-         res = int(a_string)
-
-         print(res)
-         print(type(res))
-         S = (res**private) % function.n
-         
-         #Signature
-         Sm=Label(top, text="Signature : ")
-         Sm.grid(row=8, column=3)
-         print("aicha")
-
-         lo = Entry(top, width=25)
-         lo.grid(row=9, column=3)
-         lo.insert(0,S)
-
-
-         pm=Label(top, text="Signature 2 : ")
-         pm.grid(row=10, column=3)
-         M1 = ((S**exposant()) % function.n)
-
-
-         mo = Entry(top, width=25)
-         mo.grid(row=9, column=3)
-         mo.insert(0,M1)
-         if M1 != S:
-                  pm=Label(top, text="Message modifier")
-                  pm.grid(row=11, column=3)
-         return S
-
-def stillpublickey():
-  buttan = Button(root, text="Key",background="#856ff8",command= lambda:publicKey())
-  buttan.grid(row=0, column=1)
-
-
-def publicKey():
- 
-  AYA=Toplevel()
-  AYA.title('Key to Oumaima')
- 
-  #public key e
-  Pk1=Label(AYA, text="public key e :")
-  Pk1.grid(row=0, column=0)
-  Pkey1 = Entry(AYA, width=35)
-  Pkey1.grid(row=0, column=1)
-  Pkey1.insert(0,public2[0])
-
- #public key n
-  Pk1=Label(AYA, text="public key n :")
-  Pk1.grid(row=1, column=0)
-  Pkey1 = Entry(AYA, width=35)
-  Pkey1.grid(row=1, column=1)
-  Pkey1.insert(0,public2[1])
-
- #DONE
-
-  Bkey1 = Button(AYA,text="Done...",command= lambda:Done())
-  Bkey1.grid(row=2, column=1)
-
-def Done():
-  n1.insert(0,public2[1])
-  pu.insert(0,public2[0])
-
-
-def  getmsg1():
+def getmsg1():
          global pol
          global chifreee
          global dechiffree
@@ -567,52 +376,7 @@ def  getmsg1():
 
          return chifreee
 
-def msg111():
-        #message dechiffre
-         mm1=Label(pol, text="decrypted message : ")
-         mm1.grid(row=10, column=0)
-        
-
-         lo1 = Entry(pol, width=25)
-         lo1.grid(row=10, column=1)
-         lo1.insert(0,dechiffree)
-
-
-
-def getEntry():
-         global phi
-         global my_e
-         global private
-         global public1
-         eA.insert(0,function.p)
-         e1.insert(0,function.q)
-         n1.insert(0,function.n)
-         my_e = exposant()
-         d= function.inverse_modulaire(my_e,function.phi)
-         public1 = (my_e,function.n)
-         private = d
-         pu.insert(0,my_e)
-         pr.insert(0,d)
-         print("la cle public est:",public1)
-         print("la cle privée est:", private)
-
-
-def newmsg():
-         butt = Button(root, text="New msg",background="#856ff8", command= lambda:getmsg())
-         butt.grid(row=0, column=10)
-         hack1.insert(0,function.n)
-
-     
-        
-def exposant():
-         e=random.randrange(0, 10000)
-         while function.pgcd(e,function.phi) !=1:
-          e=random.randrange(0, 10000)
-         print("L'exposant e = ",e)
-         return e
-
-
-def  getmsg():
+def getmsg():
          global top
          global chifreee
          global dechiffree
@@ -690,7 +454,6 @@ def stillpublickey():
   buttan = Button(root, text="Key",background="#856ff8",command= lambda:publicKey())
   buttan.grid(row=0, column=1)
 
-
 def publicKey():
  
   AYA=Toplevel()
@@ -719,15 +482,6 @@ def Done():
   n1.insert(0,public2[1])
   pu.insert(0,public2[0])
 
-
-  
-def exposant():
-         e=random.randrange(0, 10000)
-         while function.pgcd(e,function.phi) !=1:
-          e=random.randrange(0, 10000)
-         print("L'exposant e = ",e)
-         return e
-
 def pirat1():
   L,k=function.main(function.n)
   zoo=Toplevel()
@@ -751,6 +505,63 @@ def pirat1():
   n11.grid(row=3, column=1)
   n11.insert(0,k)
   ep1.insert(0,my_e)
+
+def Done1():
+  n2.insert(0,public1[1])
+  pu2.insert(0,public1[0])
+
+def publicKey1():
+  AYA1=Toplevel()
+  AYA1.title('Key to Ayman')
+
+  #public key e
+  Pk11=Label(AYA1, text="public key e :")
+  Pk11.grid(row=0, column=0)
+  Pkey11 = Entry(AYA1, width=35)
+  Pkey11.grid(row=0, column=1)
+  Pkey11.insert(0,public1[0])
+
+ #public key n
+  Pk11=Label(AYA1, text="public key n :")
+  Pk11.grid(row=1, column=0)
+  Pkey11 = Entry(AYA1, width=35)
+  Pkey11.grid(row=1, column=1)
+  Pkey11.insert(0,public1[1])
+
+ #DONE
+  Bkey1 = Button(AYA1,text="Done...",command= lambda:Done1())
+  Bkey1.grid(row=2, column=0)
+
+def new():
+         global e
+         global e1
+         global eA
+         lok = Toplevel()         
+         lok.title('Generator')
+         lok.iconbitmap('Crypte-RSA-Attack-Simulator\img\pizza.ico')
+         
+         #P
+         b=Label(lok, text="P")
+         b.grid(row=0, column=1)
+
+         eA = Entry(lok, width=25)
+         eA.grid(row=1, column=1)
+         #Q
+         bE=Label(lok, text="Q")
+         bE.grid(row=0, column=3)
+
+         e1 = Entry(lok, width=25)
+         e1.grid(row=1, column=3)
+
+        
+         #ButtonExit
+
+         s = Button(lok, text="exit")
+         s.grid(row=2, column=4 )
+         #ButtonStart
+
+         s = Button(lok, text="Start",command= lambda : getEntry())
+         s.grid(row=2, column=2)
 
 
 frame.mainloop()
